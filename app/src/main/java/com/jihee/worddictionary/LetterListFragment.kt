@@ -15,13 +15,14 @@ class LetterListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return DataBindingUtil.inflate<FragmentLetterListBinding>(
             inflater,
             R.layout.fragment_letter_list,
             container,
             false
         ).run {
+            //binding 내부에있는 recyclerview
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = LetterAdapter()

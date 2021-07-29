@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jihee.worddictionary.databinding.FragmentWordListBinding
 
 class WordListFragment : Fragment() {
@@ -17,14 +18,17 @@ class WordListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return DataBindingUtil.inflate<FragmentWordListBinding>(
             inflater,
             R.layout.fragment_word_list,
             container,
             false
         ).run {
-            textview.text = args.letter
+            wordList.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = WordAdapter(args.letter, context)
+            }
 
             root
         }
