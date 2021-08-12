@@ -30,7 +30,7 @@ class WordAdapter(private val letterId: String, context: Context) :
             val letter = (v as Button).text.toString()
             val address = "https://www.google.com/search?q=$letter"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(address))
-            it.button.context.startActivity(intent) // 에러났었음(context)
+            v.context.startActivity(intent) // 에러났었음(context)
         }
     }
 
