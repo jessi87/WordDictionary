@@ -1,6 +1,8 @@
 package com.jihee.worddictionary
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,8 +26,11 @@ class WordAdapter(private val letterId: String, context: Context) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.item_view, parent, false)
     ).also {
-        it.button.setOnClickListener {
-
+        it.button.setOnClickListener { v ->
+            val letter = (v as Button).text.toString()
+            val address = "https://www.google.com/search?q=$letter"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(address))
+            it.button.context.startActivity(intent) // 에러났었음(context)
         }
     }
 
@@ -39,7 +44,7 @@ class WordAdapter(private val letterId: String, context: Context) :
     override fun getItemCount(): Int = filteredWords.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val button = view.findViewById<Button>(R.id.btn_item)
+        val button: Button = view.findViewById<Button>(R.id.btn_item)
     }
 
 }

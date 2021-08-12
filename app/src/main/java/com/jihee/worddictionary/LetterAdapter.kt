@@ -1,15 +1,11 @@
 package com.jihee.worddictionary
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.jihee.worddictionary.databinding.FragmentWordListBinding
 
 class LetterAdapter : RecyclerView.Adapter<LetterAdapter.ViewHolder>() {
     private val list = ('A').rangeTo('Z').toList()
@@ -23,7 +19,8 @@ class LetterAdapter : RecyclerView.Adapter<LetterAdapter.ViewHolder>() {
 //            val letter = it.button.text.toString()
             it.button.setOnClickListener { v ->
                 val letter = (v as Button).text.toString()
-                v.findNavController().navigate(LetterListFragmentDirections.actionToWordList(letter))
+                v.findNavController()
+                    .navigate(LetterListFragmentDirections.actionToWordList(letter))
             }
         }
 
@@ -50,8 +47,8 @@ class LetterAdapter : RecyclerView.Adapter<LetterAdapter.ViewHolder>() {
 
     //레이아웃 내에서 View 연결
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val button = view.findViewById<Button>(R.id.btn_item).apply {
-            setOnClickListener {  }
+        val button: Button = view.findViewById<Button>(R.id.btn_item).apply {
+            setOnClickListener { }
         }
     }
 }
